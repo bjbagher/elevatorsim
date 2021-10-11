@@ -126,19 +126,18 @@ function App() {
       currentFloor > buildingParams.minFloor
     ) {
       await reducer(ACTIONS.GO_DOWN());
-      // go up
+      // if iddle, go up
     } else if (
       status === STATUS.IDLE &&
       floorsToStopGoingUp.find((f) => f > currentFloor)
     ) {
       await reducer(ACTIONS.SET_STATUS_UP());
-      // go down
+      // if iddle, go down
     } else if (
       status === STATUS.IDLE &&
       floorsToStopGoingDown.find((f) => f < currentFloor)
     ) {
       await reducer(ACTIONS.SET_STATUS_DOWN());
-      // go idle
     } else if (
       status === STATUS.IDLE &&
       floorsToStopGoingDown.find((f) => f > currentFloor)
@@ -172,50 +171,7 @@ function App() {
     const inputFloor = +(onChange.match(/\d+/) || [])[0];
     const outsideCall = (onChange.match(/u|d/) || [])[0];
 
-    if (currentFloor === buildingParams.minFloor && status === STATUS.IDLE) {
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_UP(
-          inputFloor > buildingParams.maxFloor
-            ? buildingParams.maxFloor
-            : inputFloor
-        )
-      );
-    } else if (
-      currentFloor === buildingParams.maxFloor &&
-      status === STATUS.IDLE
-    ) {
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_DOWN(
-          inputFloor < buildingParams.minFloor
-            ? buildingParams.minFloor
-            : inputFloor
-        )
-      );
-    } else if (
-      outsideCall?.toLowerCase() === "u" &&
-      inputFloor < currentFloor &&
-      !floorsToStopGoingDown.some((f) => f < inputFloor)
-    ) {
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_DOWN(
-          inputFloor < buildingParams.minFloor
-            ? buildingParams.minFloor
-            : inputFloor
-        )
-      );
-    } else if (
-      outsideCall?.toLowerCase() === "d" &&
-      inputFloor > currentFloor &&
-      !floorsToStopGoingUp.some((f) => f > inputFloor)
-    ) {
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_UP(
-          inputFloor > buildingParams.maxFloor
-            ? buildingParams.maxFloor
-            : inputFloor
-        )
-      );
-    } else if (outsideCall?.toLowerCase() === "u") {
+    if (outsideCall?.toLowerCase() === "u") {
       await reducer(
         ACTIONS.SET_FLOORS_GOING_UP(
           inputFloor > buildingParams.maxFloor

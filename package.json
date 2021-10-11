@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "parcel public/index.html --open"
+    "start": "tsc && cp src/styles.css dist/styles.css && parcel public/index.html --open"
   },
   "keywords": [],
   "author": "",
