@@ -31,5 +31,7 @@
     "jest",
     "src/setupTests.ts"
   ],
-  "include": ["src/*.tsx", "src/*.css"]
+  "include": [
+    "src/*.tsx", "src/*.ts"
+  ]
 }
