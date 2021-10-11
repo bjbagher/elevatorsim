@@ -187,21 +187,29 @@ function App() {
         )
       );
     } else if (inputFloor > currentFloor + 1) {
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_UP(
-          inputFloor > buildingParams.maxFloor
-            ? buildingParams.maxFloor
-            : inputFloor
-        )
-      );
+      if (
+        floorsToStopGoingDown.length !== 0 ||
+        floorsToStopGoingUp.length !== 0
+      )
+        await reducer(
+          ACTIONS.SET_FLOORS_GOING_UP(
+            inputFloor > buildingParams.maxFloor
+              ? buildingParams.maxFloor
+              : inputFloor
+          )
+        );
     } else if (inputFloor <= currentFloor + 1)
-      await reducer(
-        ACTIONS.SET_FLOORS_GOING_DOWN(
-          inputFloor < buildingParams.minFloor
-            ? buildingParams.minFloor
-            : inputFloor
-        )
-      );
+      if (
+        floorsToStopGoingDown.length !== 0 ||
+        floorsToStopGoingUp.length !== 0
+      )
+        await reducer(
+          ACTIONS.SET_FLOORS_GOING_DOWN(
+            inputFloor < buildingParams.minFloor
+              ? buildingParams.minFloor
+              : inputFloor
+          )
+        );
     await asAsync(onChange)(setInput);
   };
 
