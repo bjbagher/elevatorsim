@@ -1,0 +1,29 @@
+{
+  "name": "elevator_sim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "parcel public/index.html --open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "@types/styled-components": "^5.1.15",
+    "parcel-bundler": "^1.9.4",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "axios": "^0.22.0",
+    "framer-motion": "^4.1.17",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1",
+    "xstate": "^4.25.0"
+  }
+}
