@@ -1,5 +1,6 @@
 import * as React from "react";
 import Elevator from "./Elevator";
+import Display from "./Display";
 
 const SPEED_BETWEEN_FLOORS = 2000;
 const STATUS = {
@@ -187,29 +188,21 @@ function App() {
         )
       );
     } else if (inputFloor > currentFloor + 1) {
-      if (
-        floorsToStopGoingDown.length !== 0 ||
-        floorsToStopGoingUp.length !== 0
-      )
-        await reducer(
-          ACTIONS.SET_FLOORS_GOING_UP(
-            inputFloor > buildingParams.maxFloor
-              ? buildingParams.maxFloor
-              : inputFloor
-          )
-        );
+      await reducer(
+        ACTIONS.SET_FLOORS_GOING_UP(
+          inputFloor > buildingParams.maxFloor
+            ? buildingParams.maxFloor
+            : inputFloor
+        )
+      );
     } else if (inputFloor <= currentFloor + 1)
-      if (
-        floorsToStopGoingDown.length !== 0 ||
-        floorsToStopGoingUp.length !== 0
-      )
-        await reducer(
-          ACTIONS.SET_FLOORS_GOING_DOWN(
-            inputFloor < buildingParams.minFloor
-              ? buildingParams.minFloor
-              : inputFloor
-          )
-        );
+      await reducer(
+        ACTIONS.SET_FLOORS_GOING_DOWN(
+          inputFloor < buildingParams.minFloor
+            ? buildingParams.minFloor
+            : inputFloor
+        )
+      );
     await asAsync(onChange)(setInput);
   };
 
@@ -220,6 +213,12 @@ function App() {
   return (
     <div className="App">
       <h1>Elevator</h1>
+      <Display
+        currentFloor={currentFloor}
+        status={status}
+        floorsToStopGoingUp={floorsToStopGoingUp}
+        floorsToStopGoingDown={floorsToStopGoingDown}
+      />
       <form className="console" onSubmit={handleSubmit}>
         <label>
           console:
