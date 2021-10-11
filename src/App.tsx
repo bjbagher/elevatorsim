@@ -149,7 +149,6 @@ function App() {
     ) {
       await reducer(ACTIONS.SET_STATUS_DOWN());
     } else {
-      await reducer({ type: "RESET" });
       await reducer(ACTIONS.SET_STATUS_IDLE());
     }
   };
