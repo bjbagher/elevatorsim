@@ -7,7 +7,7 @@ export default function Display({
   floorsToStopGoingUp,
 }: any) {
   return (
-    <div>
+    <div className="display">
       <div> STATUS: {status}</div>
       <div> CURRENT FLOOR : {currentFloor}</div>
       <div>
